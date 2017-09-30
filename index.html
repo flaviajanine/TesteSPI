@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+
+    <title>Textboxes</title>
+
+    <link href="css/bootstrap.css" rel="stylesheet">
+
+</head>
+<style>
+    body {
+        font-family: "Helvetica Neue", Helvetica;
+        background-color:#ffffe6;
+    }
+
+    .picker {
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        width: 720px;
+        height: 180px;
+    }
+
+
+    #display {
+        width: 100%;
+        height: 100px;
+        background: #730aa2;
+        transition: background 100ms;
+        margin-top: 30px;
+        border: 1px solid #000;
+    }
+
+    #displayfont {
+        width: 100%;
+        height: 100px;
+        background: #730aa2;
+        transition: background 100ms;
+        margin-top: 30px;
+        border: 1px solid #000;
+    }
+
+    input {
+        display: block;
+        width: 100%;
+    }
+</style>
+
+<body>
+<div class="picker">
+    <p>Pick a background color:</p>
+    Red: <input type="range" min="0" max="255" step="1" id="red" value="115">
+    Green: <input type="range" min="0" max="255" step="1" id="green" value="10"> 
+    Blue: <input type="range" min="0" max="255" step="1" id="blue" value="162">
+    <div id="display"></div>
+
+    </br>
+    </br>
+
+    Pick a font size:
+    <input type="range" min="10" max="42" id="fontsize" value="12" onchange="getTextSize(this.value)"/>
+    < id="showsize"></label>
+
+    </br>
+    </br>
+
+    <p>Pick a font color:</p>
+    Red: <input type="range" min="0" max="255" step="1" id="red2" value="115">
+    Green: <input type="range" min="0" max="255" step="1" id="green2" value="10"> 
+    Blue: <input type="range" min="0" max="255" step="1" id="blue2" value="162">
+    <div id="displayfont"></div>
+
+    </br>
+    </br>
+
+    <div>
+    <input type="button" onclick="createTextBox()" value="Create Textbox" />
+    </div>
+   
+
+    <div id="texts"></div>
+
+    
+</div>
+
+
+
+<script type="text/javascript">
+    var input = document.querySelectorAll("input");
+
+    for (var i = 0; i < input.length; i++) {
+        input[i].addEventListener("input", function () {
+            var red = document.getElementById("red").value,
+                green = document.getElementById("green").value,
+                blue = document.getElementById("blue").value;
+            var display = document.getElementById("display");
+            display.style.background = "rgb(" + red + ", " + green + ", " + blue + ")";
+        });
+    }
+
+    for (var i = 0; i < input.length; i++) {
+        input[i].addEventListener("input", function () {
+            var red = document.getElementById("red2").value,
+                green = document.getElementById("green2").value,
+                blue = document.getElementById("blue2").value;
+            var displayfont = document.getElementById("displayfont");
+            displayfont.style.background = "rgb(" + red + ", " + green + ", " + blue + ")";
+        });
+    }
+
+
+    function getTextSize(val) {
+        document.getElementById("showsize").value = val;        
+    }
+
+    function createTextBox() {
+        var text = document.createElement("TEXTAREA");
+        text.style.width = '100px';
+        text.style.height = '50px';
+        text.style.backgroundColor = display.style.backgroundColor;
+        text.style.color = displayfont.style.backgroundColor;
+        text.style.fontSize = document.getElementById("fontsize").value;
+        var t = document.createTextNode("Insert text");
+        text.appendChild(t);
+        document.getElementById("texts").appendChild(text);
+    }
+</script>
+
+</body>
+</html>
