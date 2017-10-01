@@ -11,29 +11,32 @@
     <title>Teste SPI</title>
 
     <link href="css/bootstrap.css" rel="stylesheet">
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="js/functions.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 </head>
 <style>
     body {
         font-family: "Helvetica Neue", Helvetica;
         background-color: #F1F1F1;
-        height: 100%;
+        padding: 0;
+        margin: 0;
     }
 
     header {
         height: 46px;
+        max-width: 100%;
         font-size: 22px;
         background-color: #C0E9E3;
-        clear: left;
         text-align: center;
         text-justify: center;
+        margin-right: 0;
         right: 0;
         top: 0;
         left: 0;
-        margin: 0px auto;
+        z-index: 1;
+        margin: 0;
     }
 
     footer {
@@ -69,6 +72,19 @@
         width: 100%;
     }
 
+    #navopen {
+        border: none;
+        color: #000000;
+        background-color: #C0E9E3;
+        height: 46px;
+    }
+
+    #navclose {
+        border: none;
+        color: #000000;
+        background-color: #FAFAFA;
+    }
+
     button {
         border: none;
         color: #F1F1F1;
@@ -88,10 +104,7 @@
         padding: 1em;
         position: fixed;
         height: 90%;
-    }
-
-    .sidebar-nav {
-        position: fixed;
+        width: 230px;
     }
 
     .picker {
@@ -99,12 +112,11 @@
         bottom: 0;
         left: 0;
         margin: auto;
-        width: 220px;
         height: 100%;
     }
 
     article {
-        margin-left: 220px;
+        margin-left: 230px;
         padding: 1em;
     }
 
@@ -136,19 +148,43 @@
         display: block;
         width: 100%;
     }
+
+    @media screen and (max-width: 490px) {
+        #navclose,
+        #navopen {
+            display: inline;
+        }
+        #sidebar-wrapper {
+            display: none;
+        }
+        header {
+            width: 100%;
+        }
+    }
+
+    @media screen and (min-width: 500px) {
+        #navclose,
+        #navopen {
+            display: none;
+        }
+    }
 </style>
 
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 <body>
-    <header>
-        Create and drag Texts
-    </header>
 
     <body>
 
         <div class="container-full">
             <div id="wrapper">
+                <header>
+                    <button id="navopen" onclick="navOpen()"><i class="fa fa-bars"></i></button> Create and drag Texts
+                </header>
                 <div id="sidebar-wrapper">
                     <div class="picker">
+                        <button id="navclose" onclick="navClose()"><i class="fa fa-close"></i></button>
                         <p>Pick a background color:</p>
                         Red: <input type="range" min="0" max="255" step="1" id="red" value="179"> Green: <input type="range"
                             min="0" max="255" step="1" id="green" value="222"> Blue: <input type="range" min="0" max="255" step="1"
@@ -176,20 +212,20 @@
 
                         <p>Pick a box size:</p>
                         <select id="boxsize">
-                                    <option value="8">8</option>
-                                    <option value="10">10</option>
-                                    <option value="12">12</option>
-                                    <option value="14">14</option>
-                                    <option value="16">16</option>
-                                    <option value="18">18</option>
-                                    <option value="20">20</option>
-                                    <option value="22">22</option>
-                                    <option value="24">24</option>
-                                    <option value="26">26</option>
-                                    <option value="28">28</option>
-                                    <option value="36">36</option>
-                                    <option value="48">48</option>
-                                    <option value="72">72</option>
+                                    <option value="80">80</option>
+                                    <option value="100">100</option>
+                                    <option value="120">120</option>
+                                    <option value="140">140</option>
+                                    <option value="160">160</option>
+                                    <option value="180">180</option>
+                                    <option value="200">200</option>
+                                    <option value="220">220</option>
+                                    <option value="240">240</option>
+                                    <option value="260">260</option>
+                                    <option value="280">280</option>
+                                    <option value="360">360</option>
+                                    <option value="480">480</option>
+                                    <option value="720">720</option>
                             </select>
 
                         <p>Pick a font color:</p>
@@ -228,6 +264,7 @@
         <footer class="footer">
             <div class="container">
                 <button id="submit" onclick="toJSON()">To JSON</button>
+                <button id="newpag" onclick="location.href='new.html'">Send</button>
             </div>
         </footer>
 
@@ -253,7 +290,7 @@
             }
 
             $(function () {
-                $("#texts").draggable();
+                $("#txt").draggable();
             });
         </script>
 
