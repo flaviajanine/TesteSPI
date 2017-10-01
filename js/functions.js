@@ -1,9 +1,9 @@
 
 function navClose() {
-    document.getElementById("mySidenav").style.display = "none";
+    document.getElementById("sidebar-wrapper").style.display = "none";
 }
 function navOpen() {
-    document.getElementById("mySidenav").style.display = "block";
+    document.getElementById("sidebar-wrapper").style.display = "block";
 }
 
 function createTextBox() {
