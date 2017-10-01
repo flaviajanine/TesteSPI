@@ -8,32 +8,115 @@
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
     <meta content="width=device-width, initial-scale=1" name="viewport">
 
-    <title>Textboxes</title>
+    <title>Teste SPI</title>
 
     <link href="css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="js/functions.js"></script>
 
 </head>
 <style>
     body {
         font-family: "Helvetica Neue", Helvetica;
-        background-color:#ffffe6;
+        background-color: #F1F1F1;
+        height: 100%;
+    }
+
+    header {
+        height: 46px;
+        font-size: 22px;
+        background-color: #C0E9E3;
+        clear: left;
+        text-align: center;
+        text-justify: center;
+        right: 0;
+        top: 0;
+        left: 0;
+        margin: 0px auto;
+    }
+
+    footer {
+        padding: 1rem;
+        font-size: 22px;
+        width: 100%;
+        height: 7%;
+        background-color: #C0E9E3;
+        text-align: right;
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
+
+    #page-content-wrapper {
+        padding: 300px;
+    }
+
+    select {
+        height: 34px;
+        width: 100%;
+    }
+
+    select select {
+        border: 1px solid #ccc;
+        font-size: 16px;
+        height: 34px;
+        width: 268px;
+    }
+
+    #create {
+        width: 100%;
+    }
+
+    button {
+        border: none;
+        color: #F1F1F1;
+        background-color: #000000;
+        padding: 10px 20px 10px 20px;
+    }
+
+    button:hover {
+        border: none;
+        color: #000000;
+        background-color: #dbdbdb;
+        text-decoration: none;
+    }
+
+    #sidebar-wrapper {
+        background-color: #FAFAFA;
+        padding: 1em;
+        position: fixed;
+        height: 90%;
+    }
+
+    .sidebar-nav {
+        position: fixed;
     }
 
     .picker {
         top: 0;
         bottom: 0;
         left: 0;
-        right: 0;
         margin: auto;
-        width: 720px;
-        height: 180px;
+        width: 220px;
+        height: 100%;
     }
 
+    article {
+        margin-left: 220px;
+        padding: 1em;
+    }
+
+    #showsize {
+        background-color: #F1F1F1;
+        border: #F1F1F1;
+    }
 
     #display {
         width: 100%;
-        height: 100px;
-        background: #730aa2;
+        height: 10%;
+        background: #B3DEF3;
         transition: background 100ms;
         margin-top: 30px;
         border: 1px solid #000;
@@ -41,12 +124,13 @@
 
     #displayfont {
         width: 100%;
-        height: 100px;
-        background: #730aa2;
+        height: 10%;
+        background: #BF7ED3;
         transition: background 100ms;
         margin-top: 30px;
         border: 1px solid #000;
     }
+
 
     input {
         display: block;
@@ -55,84 +139,124 @@
 </style>
 
 <body>
-<div class="picker">
-    <p>Pick a background color:</p>
-    Red: <input type="range" min="0" max="255" step="1" id="red" value="115">
-    Green: <input type="range" min="0" max="255" step="1" id="green" value="10"> 
-    Blue: <input type="range" min="0" max="255" step="1" id="blue" value="162">
-    <div id="display"></div>
+    <header>
+        Create and drag Texts
+    </header>
 
-    </br>
-    </br>
+    <body>
 
-    Pick a font size:
-    <input type="range" min="10" max="42" id="fontsize" value="12" onchange="getTextSize(this.value)"/>
-    < id="showsize"></label>
-
-    </br>
-    </br>
-
-    <p>Pick a font color:</p>
-    Red: <input type="range" min="0" max="255" step="1" id="red2" value="115">
-    Green: <input type="range" min="0" max="255" step="1" id="green2" value="10"> 
-    Blue: <input type="range" min="0" max="255" step="1" id="blue2" value="162">
-    <div id="displayfont"></div>
-
-    </br>
-    </br>
-
-    <div>
-    <input type="button" onclick="createTextBox()" value="Create Textbox" />
-    </div>
-   
-
-    <div id="texts"></div>
-
-    
-</div>
+        <div class="container-full">
+            <div id="wrapper">
+                <div id="sidebar-wrapper">
+                    <div class="picker">
+                        <p>Pick a background color:</p>
+                        Red: <input type="range" min="0" max="255" step="1" id="red" value="179"> Green: <input type="range"
+                            min="0" max="255" step="1" id="green" value="222"> Blue: <input type="range" min="0" max="255" step="1"
+                            id="blue" value="243">
+                        <div id="display"></div>
 
 
+                        <p>Pick a font size:</p>
+                        <select id="fontsize">
+                                        <option value="8">8</option>
+                                        <option value="10">10</option>
+                                        <option value="12">12</option>
+                                        <option value="14">14</option>
+                                        <option value="16">16</option>
+                                        <option value="18">18</option>
+                                        <option value="20">20</option>
+                                        <option value="22">22</option>
+                                        <option value="24">24</option>
+                                        <option value="26">26</option>
+                                        <option value="28">28</option>
+                                        <option value="36">36</option>
+                                        <option value="48">48</option>
+                                        <option value="72">72</option>
+                                </select>
 
-<script type="text/javascript">
-    var input = document.querySelectorAll("input");
+                        <p>Pick a box size:</p>
+                        <select id="boxsize">
+                                    <option value="8">8</option>
+                                    <option value="10">10</option>
+                                    <option value="12">12</option>
+                                    <option value="14">14</option>
+                                    <option value="16">16</option>
+                                    <option value="18">18</option>
+                                    <option value="20">20</option>
+                                    <option value="22">22</option>
+                                    <option value="24">24</option>
+                                    <option value="26">26</option>
+                                    <option value="28">28</option>
+                                    <option value="36">36</option>
+                                    <option value="48">48</option>
+                                    <option value="72">72</option>
+                            </select>
 
-    for (var i = 0; i < input.length; i++) {
-        input[i].addEventListener("input", function () {
-            var red = document.getElementById("red").value,
-                green = document.getElementById("green").value,
-                blue = document.getElementById("blue").value;
-            var display = document.getElementById("display");
-            display.style.background = "rgb(" + red + ", " + green + ", " + blue + ")";
-        });
-    }
+                        <p>Pick a font color:</p>
+                        Red: <input type="range" min="0" max="255" step="1" id="red2" value="191"> Green: <input type="range"
+                            min="0" max="255" step="1" id="green2" value="126"> Blue: <input type="range" min="0" max="255" step="1"
+                            id="blue2" value="211">
+                        <div id="displayfont"></div>
 
-    for (var i = 0; i < input.length; i++) {
-        input[i].addEventListener("input", function () {
-            var red = document.getElementById("red2").value,
-                green = document.getElementById("green2").value,
-                blue = document.getElementById("blue2").value;
-            var displayfont = document.getElementById("displayfont");
-            displayfont.style.background = "rgb(" + red + ", " + green + ", " + blue + ")";
-        });
-    }
+                        <p>Input your text:</p>
+                        <input type="text" id="textinput" maxlength="10" />
 
+                        <div>
+                            <button onclick="createTextBox()" id="create">Create Text</button>
+                        </div>
 
-    function getTextSize(val) {
-        document.getElementById("showsize").value = val;        
-    }
+                    </div>
+                </div>
+                <!-- sidebar-wrapper -->
 
-    function createTextBox() {
-        var text = document.createElement("TEXTAREA");
-        text.style.width = '100px';
-        text.style.height = '50px';
-        text.style.backgroundColor = display.style.backgroundColor;
-        text.style.color = displayfont.style.backgroundColor;
-        text.style.fontSize = document.getElementById("fontsize").value;
-        var t = document.createTextNode("Insert text");
-        text.appendChild(t);
-        document.getElementById("texts").appendChild(text);
-    }
-</script>
+                <div id="page-content-wrapper">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-lg-12">
 
-</body>
+                                <div id="texts"></div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- content-wrapper -->
+            </div>
+            <!-- wrapper -->
+        </div>
+        <!-- container-full -->
+        <footer class="footer">
+            <div class="container">
+                <button id="submit" onclick="toJSON()">To JSON</button>
+            </div>
+        </footer>
+
+        <script type="text/javascript">
+            var input = document.querySelectorAll("input");
+            for (var i = 0; i < input.length; i++) {
+                input[i].addEventListener("input", function () {
+                    var red = document.getElementById("red").value,
+                        green = document.getElementById("green").value,
+                        blue = document.getElementById("blue").value;
+                    var display = document.getElementById("display");
+                    display.style.background = "rgb(" + red + ", " + green + ", " + blue + ")";
+                });
+            }
+            for (var i = 0; i < input.length; i++) {
+                input[i].addEventListener("input", function () {
+                    var red = document.getElementById("red2").value,
+                        green = document.getElementById("green2").value,
+                        blue = document.getElementById("blue2").value;
+                    var displayfont = document.getElementById("displayfont");
+                    displayfont.style.background = "rgb(" + red + ", " + green + ", " + blue + ")";
+                });
+            }
+
+            $(function () {
+                $("#texts").draggable();
+            });
+        </script>
+
+    </body>
+
 </html>
