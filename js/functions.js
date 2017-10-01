@@ -51,9 +51,25 @@ function toJSON(){
       }
       
       // html2json :: Node -> JSONString
-      const html2json = e =>
-        JSON.stringify(Elem(e), null, '  ')
+      const html2json = e => JSON.stringify(Elem(e), null, '  ')
         
       console.log(html2json(document.querySelector("#texts")))
       sessionStorage.setItem('ElementsAtributes', html2json(document.querySelector("#texts")));
+}
+
+function getJSON(){
+    var items = JSON.parse(sessionStorage.getItem('ElementsAtributes'));
+    console.log(items);
+    //console.log(typeof items.children[0].children[0].textContent);
+    //console.log(typeof items.children[0].attributes[2][1]);
+
+    for(var i = 0; i < items.children.length; i++) {
+        var P = document.createElement("P");
+        P.id = items.children[i].attributes[0][1];
+        P.className = items.children[i].attributes[1][1];
+        P.style = items.children[i].attributes[2][1];
+        P.textContent = items.children[i].children[0].textContent;  
+        document.getElementById("content").appendChild(P);
+    }
+
 }
